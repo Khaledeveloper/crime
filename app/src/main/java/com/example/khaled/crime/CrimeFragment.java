@@ -40,6 +40,7 @@ EditText mEditText;
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
         mCheckBox=(CheckBox)v.findViewById(R.id.crime_solvedCheckID);
+        mCheckBox.setChecked(mCrime.isSolved());
         mDateButtn=(Button)v.findViewById(R.id.crime_dateBtnID);
         mEditText =(EditText)v.findViewById(R.id.EditTextFragmentID);
         mEditText.addTextChangedListener(new TextWatcher() {
@@ -66,6 +67,7 @@ EditText mEditText;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mCrime.setSolved(true);
+
             }
         });
 
