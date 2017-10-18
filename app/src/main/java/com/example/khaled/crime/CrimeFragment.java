@@ -28,6 +28,7 @@ EditText mEditText;
     Button mDateButtn;
     CheckBox mCheckBox;
     private Crime mCrime;
+    private static final int REQUEST_DATE = 0;
     Date mDate;
     private static final String ARG_CRIME_ID = "crime_id";
 
@@ -119,7 +120,9 @@ EditText mEditText;
                 mDate = mCrime.getDate();
                 FragmentManager fragmentManager = getFragmentManager();
                 DialogPickerFragment dialogPickerFragment = DialogPickerFragment.newInstace(mDate);
+                dialogPickerFragment.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
                 dialogPickerFragment.show(fragmentManager ,DIALOG_DATE );
+
             }
         });
 
