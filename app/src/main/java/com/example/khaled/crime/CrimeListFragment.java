@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -44,11 +45,21 @@ mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        RecyclerUpdate();
+    }
+
     private void RecyclerUpdate(){
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
-        mAdapter = new CrimeAdapter(crimes);
-        mRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new CrimeAdapter(crimes);
+            mRecyclerView.setAdapter(mAdapter);
+        }else {
+            mAdapter.notifyDataSetChanged();
+        } //the condation added in order to work with onResume to notify only
 
 
     }
@@ -72,11 +83,26 @@ private TextView mTitleCrime , mDateCrime;
            /* mCheckBoxList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    mCrime.setSolved(true);
+                   //if (mCheckBoxList.isChecked()){
+                     //   mCrime.setSolved(false);
+                  //  }else {
+                        mCrime.setSolved(true);
+
+                   // }
+
                 }
             });*/
 
+
+
+
+
+
         }
+
+
+
+
         public void Bindcrime(Crime crime){
             mCrime = crime;
             mTitleCrime.setText(mCrime.getTitle());
@@ -95,9 +121,15 @@ private TextView mTitleCrime , mDateCrime;
 
         @Override
         public void onClick(View v) {
-
-            Intent intent = new Intent(getActivity(),MainActivity.class);
+            Crime crime = new Crime();
+            //UUID CrimeID = crime.getId();
+         //changing the intent from Mainactivity to ViewPager
+          //  Intent intent = MainActivity.newIntent(getActivity(),mCrime.getId());
+            Intent intent = ViewPagerActivity.newIntent(getActivity(),mCrime.getId());
             startActivity(intent);
+
+           /* Intent intent = new Intent(getActivity(),MainActivity.class);
+            startActivity(intent);*/
 
         }
 
@@ -127,6 +159,11 @@ private TextView mTitleCrime , mDateCrime;
             holder.Bindcrime(crime);
 
         }
+
+       /* @Override
+        public int getItemViewType(int position) {
+            return super.getItemViewType(position);
+        }*/
 
         @Override
         public int getItemCount() {

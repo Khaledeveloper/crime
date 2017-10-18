@@ -1,26 +1,32 @@
 package com.example.khaled.crime;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends FragmentActivity {
+import java.util.UUID;
 
+public class MainActivity extends SingleFragmentActivity {
+    private static final String Crime_ID_KEY ="com.example.khaled.crime.crimeID";
+
+
+    public static Intent newIntent(Context context, UUID crimeID){
+        Intent intent = new Intent(context,MainActivity.class);
+        intent.putExtra(Crime_ID_KEY,crimeID);
+        return intent;
+
+    }
+
+//crimeActivity
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected Fragment creatFragment() {
+        //to send it to method of newInstance for Argue
+        UUID crimeID = (UUID)getIntent().getSerializableExtra(Crime_ID_KEY);
 
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.Fragment_Container);
-
-        if (fragment == null){
-            fragment = new CrimeFragment();
-            fm.beginTransaction()
-                    .add(R.id.Fragment_Container , fragment)
-                    .commit();
-        }
+        return CrimeFragment.newInstance(crimeID);
     }
 }
