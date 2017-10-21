@@ -1,6 +1,8 @@
 package com.example.khaled.crime;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,12 +10,14 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Date;
 import java.util.UUID;
@@ -24,7 +28,7 @@ import java.util.UUID;
  */
 public class CrimeFragment extends Fragment {
 
-EditText mEditText;
+EditText mEditText, mContentText;
     Button mDateButtn;
     CheckBox mCheckBox;
     private Crime mCrime;
@@ -126,8 +130,46 @@ EditText mEditText;
             }
         });
 
+        mContentText =(EditText)v.findViewById(R.id.NoteContentID);
+        mContentText.setText(mCrime.getContent());
+        mContentText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                   mCrime.setContent(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         return v;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode!= Activity.RESULT_OK){
+            return;
+        }
+        if (requestCode == REQUEST_DATE){
+            Date date =(Date)data
+                    .getSerializableExtra(DialogPickerFragment.DATE_KEY_BACK);
+            mCrime.setDate(date);
+        }
+        DateUpdate();
+
+    }
+
+
+
+    private void DateUpdate(){
+        mDateButtn.setText(mCrime.getDate().toString());
+    }
 }

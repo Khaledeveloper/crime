@@ -13,10 +13,19 @@ public class Crime {
     private UUID mId;
     private Date mDate;
     private boolean mSolved;
+    private String mContent;
 
     public Crime(){
         mId = UUID.randomUUID();
         mDate = new Date();
+    }
+
+    public String getContent() {
+        return mContent;
+    }
+
+    public void setContent(String content) {
+        mContent = content;
     }
 
     public UUID getId() {

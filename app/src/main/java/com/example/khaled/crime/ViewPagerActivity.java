@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.UUID;
@@ -62,5 +64,22 @@ private static final String CRIMID_KEY ="com.example.khaled.crime.crimeIDViewPag
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+
+               /* Crime crime = new Crime();
+                for (int x =0 ; x<mCrime.size() ; x++) {
+                    if (mCrime.get(x).getTitle().length()>0) {
+                        CrimeLab.get(this).addCrime(crime);
+                    }
+                }*/
+                Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

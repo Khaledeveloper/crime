@@ -1,8 +1,10 @@
 package com.example.khaled.crime;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +24,9 @@ import java.util.GregorianCalendar;
 public class DialogPickerFragment extends DialogFragment {
     DatePicker mDatePicker;
     private static final String NewInstace_Tage_date ="com.example.khaled.crime.date";
+    public static final String DATE_KEY_BACK =
+            "com.khaled.android.criminalintent.date";
+
 
     public static DialogPickerFragment newInstace(Date date){
         Bundle bundle = new Bundle();
@@ -61,10 +66,24 @@ public class DialogPickerFragment extends DialogFragment {
                         int day = mDatePicker.getDayOfMonth();
                         int month = mDatePicker.getMonth();
                         Date date = new GregorianCalendar(year, month , day).getTime();
-
+        sendResult(Activity.RESULT_OK, date);
                     }
                 })
                 .create();
+
+
+
+
+
+    }
+
+    private void sendResult(int ResultCode , Date date){
+        if (getTargetFragment()==null){
+            return;
+        }
+        Intent intent = new Intent();
+        intent.putExtra(DATE_KEY_BACK , date);
+        getTargetFragment().onActivityResult(getTargetRequestCode(),ResultCode,intent);
 
 
     }

@@ -3,14 +3,19 @@ package com.example.khaled.crime;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,7 +28,13 @@ import java.util.UUID;
 public class CrimeListFragment extends Fragment {
     CrimeAdapter mAdapter;
 
-RecyclerView mRecyclerView;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    RecyclerView mRecyclerView;
     public CrimeListFragment() {
         // Required empty public constructor
     }
@@ -62,10 +73,13 @@ mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
         } //the condation added in order to work with onResume to notify only
 
 
+
+
     }
 
     private class Crimeholder extends RecyclerView.ViewHolder implements View.OnClickListener{
 private TextView mTitleCrime , mDateCrime;
+        private TextView mContentNote;
         private CheckBox mCheckBoxList;
         private Crime mCrime;
         public Crimeholder(View itemView) {
@@ -78,6 +92,7 @@ private TextView mTitleCrime , mDateCrime;
             mTitleCrime =(TextView) itemView.findViewById(R.id.CrimeTitle_listID);
             mDateCrime =(TextView)itemView.findViewById(R.id.CrimeDate_listID);
             mCheckBoxList =(CheckBox)itemView.findViewById(R.id.CheckBox_list_ctimeID);
+            mContentNote=(TextView) itemView.findViewById(R.id.NoteContentRowID);
 
 
            /* mCheckBoxList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -108,6 +123,7 @@ private TextView mTitleCrime , mDateCrime;
             mTitleCrime.setText(mCrime.getTitle());
             mDateCrime.setText(mCrime.getDate().toString());
             mCheckBoxList.setChecked(mCrime.isSolved());
+            mContentNote.setText(mCrime.getContent());
 
         }
 
@@ -171,4 +187,25 @@ private TextView mTitleCrime , mDateCrime;
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_item_new_crime:
+                Crime crime = new Crime();
+                CrimeLab.get(getActivity()).addCrime(crime);
+                Intent intent = ViewPagerActivity.newIntent(getActivity(), crime.getId());
+                startActivity(intent);
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
