@@ -4,9 +4,12 @@ package com.example.khaled.crime;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,11 +35,14 @@ import java.util.UUID;
  */
 public class CrimeListFragment extends Fragment {
     CrimeAdapter mAdapter;
+    Toolbar mToolbar;
+    FloatingActionButton mFAB;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     RecyclerView mRecyclerView;
@@ -51,7 +57,17 @@ public class CrimeListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
 mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
+        mToolbar=(Toolbar)view.findViewById(R.id.ToolbarrecyclerviewID);
 
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+
+        mFAB =(FloatingActionButton)view.findViewById(R.id.FABmainID);
+        mFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddNewCrime();
+            }
+        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         RecyclerUpdate();
@@ -204,16 +220,19 @@ private TextView mTitleCrime , mDateCrime;
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_list, menu);
     }
+    public void AddNewCrime(){
+        Crime crime = new Crime();
+        CrimeLab.get(getActivity()).addCrime(crime);
+        Intent intent = ViewPagerActivity.newIntent(getActivity(), crime.getId());
+        startActivity(intent);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
             case R.id.menu_item_new_crime:
-               Crime crime = new Crime();
-                CrimeLab.get(getActivity()).addCrime(crime);
-                Intent intent = ViewPagerActivity.newIntent(getActivity(), crime.getId());
-                startActivity(intent);
+               AddNewCrime();
 
 
 

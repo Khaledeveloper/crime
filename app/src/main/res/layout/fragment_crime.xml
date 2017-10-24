@@ -1,8 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-              android:background="@color/white"
+
+              android:orientation="vertical"
              tools:context="com.example.khaled.crime.CrimeFragment"
     >
 
@@ -13,14 +15,23 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_title_label"
         style="?android:listSeparatorTextViewStyle"/>-->
-<android.support.v7.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="57dp"
-    android:id="@+id/CardViewEdittextTitle">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+        android:id="@+id/CardViewEdittextTitle"
+        android:elevation="5dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/white"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        >
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/EditTextFragmentID"
+        android:background="@color/white"
+        android:textStyle="bold"
         android:hint="@string/Enter_Title"/>
 
 </android.support.v7.widget.CardView>
@@ -30,16 +41,33 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_details_label"
         style="?android:listSeparatorTextViewStyle"/>-->
+
+
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/CardViewEdittextTitle"
-        android:id="@+id/CardViewContentID">
+        android:id="@+id/CardViewContentID"
+        android:elevation="5dp"
+        android:layout_weight="35"
+
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/white"
+        android:layout_margin="8dp"
+
+
+        >
+
+
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="match_parent"
             android:id="@+id/NoteContentID"
-            android:hint="@string/Enter_Content"
+            android:hint="Note"
+            android:gravity="left"
+
+            android:background="@color/white"
             />
     </android.support.v7.widget.CardView>
 
@@ -51,16 +79,19 @@
         android:layout_marginLeft="16dp"
         android:background="@color/white"
         android:layout_marginRight="16dp"
-        android:layout_below="@id/CardViewContentID"/>
+
+        android:layout_weight=".1"/>
+       <!-- android:layout_below="@id/CardViewContentID"/> -->
 
     <CheckBox
         android:id="@+id/crime_solvedCheckID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/crime_solved_label"
-        android:layout_below="@id/crime_dateBtnID"/>
+        android:text="@string/crime_solved_label"/>
+       <!-- android:layout_below="@id/crime_dateBtnID"/> -->
 
 
-</RelativeLayout>
+</LinearLayout>

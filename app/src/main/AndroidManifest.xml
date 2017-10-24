@@ -22,6 +22,8 @@
             android:name=".activities.ViewPagerActivity"
             android:parentActivityName=".activities.CrimeListActivity">
         </activity>
+        <activity android:name=".AddNote">
+        </activity>
     </application>
 
 </manifest>

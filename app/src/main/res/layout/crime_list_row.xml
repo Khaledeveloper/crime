@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:app="http://schemas.android.com/apk/res-auto"
                  android:orientation="vertical"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
 
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:elevation="5dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/white"
+
+        android:layout_margin="10dp"
 
         >
-        <RelativeLayout
+
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -29,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/CrimeTitle_listID"
                 android:padding="4dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_toLeftOf="@id/CheckBox_list_ctimeID"
                 />
@@ -37,7 +47,7 @@
                 android:layout_height="50dp"
                 android:id="@+id/NoteContentRowID"
                 android:padding="4dp"
-                android:textStyle="bold"
+
                 android:layout_below="@id/CrimeTitle_listID"
                 />
 
