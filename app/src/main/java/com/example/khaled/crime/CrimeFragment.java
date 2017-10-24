@@ -19,6 +19,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.khaled.crime.models.Crime;
+import com.example.khaled.crime.models.CrimeLab;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -79,6 +82,14 @@ EditText mEditText, mContentText;
         mCrime = CrimeLab.get(getActivity()).getCrime(CrimeID);
     }
 
+//add for database
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -106,6 +117,7 @@ EditText mEditText, mContentText;
             }
         });
 
+       // mDateButtn.setText(mCrime.getDate().toString());
         mDateButtn.setText(mCrime.getDate().toString());
         //mDateButtn.setEnabled(false);
         mCheckBox.setChecked(mCrime.isSolved());

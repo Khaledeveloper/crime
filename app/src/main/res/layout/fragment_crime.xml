@@ -1,10 +1,10 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
               android:background="@color/white"
              tools:context="com.example.khaled.crime.CrimeFragment"
-    android:orientation="vertical">
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,22 +13,36 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_title_label"
         style="?android:listSeparatorTextViewStyle"/>-->
-
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="57dp"
+    android:id="@+id/CardViewEdittextTitle">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/EditTextFragmentID"
         android:hint="@string/Enter_Title"/>
+
+</android.support.v7.widget.CardView>
+
    <!-- <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/crime_details_label"
         style="?android:listSeparatorTextViewStyle"/>-->
-    <EditText
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:id="@+id/NoteContentID"
-        android:hint="@string/Enter_Content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/CardViewEdittextTitle"
+        android:id="@+id/CardViewContentID">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:id="@+id/NoteContentID"
+            android:hint="@string/Enter_Content"
+            />
+    </android.support.v7.widget.CardView>
+
 
     <Button
         android:id="@+id/crime_dateBtnID"
@@ -36,7 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:background="@color/white"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginRight="16dp"
+        android:layout_below="@id/CardViewContentID"/>
 
     <CheckBox
         android:id="@+id/crime_solvedCheckID"
@@ -44,7 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/crime_solved_label"/>
+        android:text="@string/crime_solved_label"
+        android:layout_below="@id/crime_dateBtnID"/>
 
 
-</LinearLayout>
+</RelativeLayout>

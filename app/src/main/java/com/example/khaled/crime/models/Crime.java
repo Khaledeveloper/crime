@@ -1,4 +1,4 @@
-package com.example.khaled.crime;
+package com.example.khaled.crime.models;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -17,6 +17,11 @@ public class Crime {
 
     public Crime(){
         mId = UUID.randomUUID();
+       mDate = new Date();
+    }
+
+    public Crime(UUID uuid){
+        mId = uuid;
         mDate = new Date();
     }
 

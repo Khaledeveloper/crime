@@ -1,4 +1,4 @@
-package com.example.khaled.crime;
+package com.example.khaled.crime.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.khaled.crime.CrimeFragment;
+
+import com.example.khaled.crime.R;
+import com.example.khaled.crime.models.Crime;
+import com.example.khaled.crime.models.CrimeLab;
 
 import java.util.List;
 import java.util.UUID;

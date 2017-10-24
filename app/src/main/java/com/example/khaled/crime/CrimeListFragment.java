@@ -18,6 +18,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.khaled.crime.activities.ViewPagerActivity;
+import com.example.khaled.crime.activities.CrimeListActivity;
+import com.example.khaled.crime.models.Crime;
+import com.example.khaled.crime.models.CrimeLab;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -69,6 +74,7 @@ mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
             mAdapter = new CrimeAdapter(crimes);
             mRecyclerView.setAdapter(mAdapter);
         }else {
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         } //the condation added in order to work with onResume to notify only
 
@@ -185,6 +191,12 @@ private TextView mTitleCrime , mDateCrime;
         public int getItemCount() {
             return mCrimes.size();
         }
+
+        //added for database
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
+        }
+
     }
 
     @Override
@@ -198,10 +210,12 @@ private TextView mTitleCrime , mDateCrime;
 
         switch (item.getItemId()){
             case R.id.menu_item_new_crime:
-                Crime crime = new Crime();
+               Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
                 Intent intent = ViewPagerActivity.newIntent(getActivity(), crime.getId());
                 startActivity(intent);
+
+
 
                 return true;
             default:
