@@ -1,12 +1,14 @@
 package com.example.khaled.crime;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +23,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.khaled.crime.activities.MainActivity;
 import com.example.khaled.crime.activities.ViewPagerActivity;
 import com.example.khaled.crime.activities.CrimeListActivity;
 import com.example.khaled.crime.models.Crime;
 import com.example.khaled.crime.models.CrimeLab;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +41,8 @@ public class CrimeListFragment extends Fragment {
     CrimeAdapter mAdapter;
     Toolbar mToolbar;
     FloatingActionButton mFAB;
+    static boolean isSelected = false;
+    ArrayList<Crime> SelectedItems = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +67,10 @@ mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
 
+        TextView textViewToolbar =(TextView)view.findViewById(R.id.TextviewToolbarRecyclerviewID);
+
+
+
         mFAB =(FloatingActionButton)view.findViewById(R.id.FABmainID);
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +81,11 @@ mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         RecyclerUpdate();
+
+        if (!isSelected){
+            textViewToolbar.setVisibility(View.GONE);
+
+        }
 
 
 
@@ -87,7 +102,7 @@ mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
         if (mAdapter == null) {
-            mAdapter = new CrimeAdapter(crimes);
+            mAdapter = new CrimeAdapter(crimes/*,getActivity()*/);
             mRecyclerView.setAdapter(mAdapter);
         }else {
             mAdapter.setCrimes(crimes);
@@ -99,14 +114,20 @@ mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
 
     }
 
-    private class Crimeholder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class Crimeholder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 private TextView mTitleCrime , mDateCrime;
         private TextView mContentNote;
-        private CheckBox mCheckBoxList;
+        public CheckBox mCheckBoxList,checkdelete;
         private Crime mCrime;
-        public Crimeholder(View itemView) {
+        CardView mCardView;
+
+        public Crimeholder(View itemView/*, CrimeListActivity crimeListActivity*/) {
             super(itemView);
+
             itemView.setOnClickListener(this);
+          //  itemView.setOnLongClickListener(this);
+
+          //  checkdelete.setVisibility(View.GONE);
 
 
 
@@ -115,6 +136,12 @@ private TextView mTitleCrime , mDateCrime;
             mDateCrime =(TextView)itemView.findViewById(R.id.CrimeDate_listID);
             mCheckBoxList =(CheckBox)itemView.findViewById(R.id.CheckBox_list_ctimeID);
             mContentNote=(TextView) itemView.findViewById(R.id.NoteContentRowID);
+            checkdelete=(CheckBox)itemView.findViewById(R.id.checkTodeleteID);
+            mCardView=(CardView)itemView.findViewById(R.id.cardviewRow);
+
+         //   mCardView.setOnLongClickListener(this);
+
+
 
 
            /* mCheckBoxList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -157,6 +184,8 @@ private TextView mTitleCrime , mDateCrime;
 
 
 
+
+
         @Override
         public void onClick(View v) {
             Crime crime = new Crime();
@@ -172,22 +201,36 @@ private TextView mTitleCrime , mDateCrime;
         }
 
 
+        @Override
+        public boolean onLongClick(View v) {
+           // CrimeListFragment.isSelected = true;
+
+            return false;
+        }
     }
 
 
-    private class CrimeAdapter extends RecyclerView.Adapter<Crimeholder>{
+    public class CrimeAdapter extends RecyclerView.Adapter<Crimeholder>{
         private List<Crime> mCrimes;
-        public CrimeAdapter(List<Crime> crimes) {
+        Context mContext;
+       // CrimeListActivity mCrimeListActivity;
+     //   CrimeListFragment mCrimeListFragment;
+        public CrimeAdapter(List<Crime> crimes/* Context ctx*/) {
+           // this.mContext = ctx;
             mCrimes = crimes;
+        //   this.mCrimeListActivity =(CrimeListActivity) mContext;
+
         }
 
         @Override
         public Crimeholder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.crime_list_row , parent , false);
+            //Crimeholder crimeholder= new Crimeholder(view, mCrimeListActivity);
 
 
             return new Crimeholder(view);
+          //  return crimeholder;
         }
 
         @Override
@@ -195,6 +238,19 @@ private TextView mTitleCrime , mDateCrime;
 
             Crime crime = mCrimes.get(position);
             holder.Bindcrime(crime);
+
+            /*if (!CrimeListFragment.isSelected) {
+
+
+                holder.checkdelete.setVisibility(View.GONE);
+            }else {
+                holder.checkdelete.setVisibility(View.VISIBLE);
+            }*/
+
+
+            holder.checkdelete.setVisibility(View.GONE);
+
+
 
         }
 
