@@ -1,4 +1,4 @@
-package com.example.khaled.crime;
+package com.example.khaled.Note;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,14 +6,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
-import com.example.khaled.crime.models.Crime;
-import com.example.khaled.crime.models.CrimeLab;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -69,6 +66,18 @@ public class DialogPickerFragment extends DialogFragment {
                         int month = mDatePicker.getMonth();
                         Date date = new GregorianCalendar(year, month , day).getTime();
         sendResult(Activity.RESULT_OK, date);
+
+
+                        FragmentManager fm = getFragmentManager();
+                        TimePickerFragment timePickerFragment = new TimePickerFragment();
+                        timePickerFragment.show(fm, null);
+                        /*
+
+                        FragmentManager fragmentManager = getFragmentManager();
+                DialogPickerFragment dialogPickerFragment = DialogPickerFragment.newInstace(mDate);
+                dialogPickerFragment.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                dialogPickerFragment.show(fragmentManager ,DIALOG_DATE );
+                         */
                     }
                 })
                 .create();

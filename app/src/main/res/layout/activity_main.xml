@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/Fragment_Container"
-    tools:context="com.example.khaled.crime.MainActivity">
+    tools:context="com.example.khaled.Note.MainActivity">
 
 
 

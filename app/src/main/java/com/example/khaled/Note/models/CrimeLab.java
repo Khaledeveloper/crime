@@ -1,15 +1,14 @@
 
-package com.example.khaled.crime.models;
+package com.example.khaled.Note.models;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.khaled.crime.database.CrimeCursorWrapper;
-import com.example.khaled.crime.database.CrimeDbHelper;
-import com.example.khaled.crime.database.CrimeDbSchema;
-import com.example.khaled.crime.database.CrimeDbSchema.CrimeTable;
+import com.example.khaled.Note.database.CrimeCursorWrapper;
+import com.example.khaled.Note.database.CrimeDbHelper;
+import com.example.khaled.Note.database.CrimeDbSchema.CrimeTable;
 
 import java.util.ArrayList;
 import java.util.List;

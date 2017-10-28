@@ -1,10 +1,9 @@
-package com.example.khaled.crime.database;
+package com.example.khaled.Note.database;
 
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.example.khaled.crime.database.CrimeDbSchema.CrimeTable;
+import com.example.khaled.Note.database.CrimeDbSchema.CrimeTable;
 
 /**
  * Created by khaled on 22/10/2017.

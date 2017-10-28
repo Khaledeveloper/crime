@@ -1,4 +1,4 @@
-package com.example.khaled.crime.activities;
+package com.example.khaled.Note.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,18 +11,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.khaled.crime.CrimeFragment;
+import com.example.khaled.Note.CrimeFragment;
 
-import com.example.khaled.crime.R;
-import com.example.khaled.crime.models.Crime;
-import com.example.khaled.crime.models.CrimeLab;
+import com.example.khaled.Note.R;
+import com.example.khaled.Note.models.Crime;
+import com.example.khaled.Note.models.CrimeLab;
 
 import java.util.List;
 import java.util.UUID;
 
 public class ViewPagerActivity extends AppCompatActivity {
     ViewPager mViewPager;
-    private List<Crime>mCrime;
+    private List<Crime> mCrime;
 private static final String CRIMID_KEY ="com.example.khaled.crime.crimeIDViewPager";
 
     public static Intent newIntent(Context context, UUID crimeid){
@@ -60,7 +60,7 @@ private static final String CRIMID_KEY ="com.example.khaled.crime.crimeIDViewPag
         });
 
 // to not start the viewpager from the bigaining
-        for (int i = 0 ; i<mCrime.size() ; i++){
+        for (int i = 0; i< mCrime.size() ; i++){
             if (mCrime.get(i).getId().equals(crimeID)){
                 mViewPager.setCurrentItem(i);
                 break;

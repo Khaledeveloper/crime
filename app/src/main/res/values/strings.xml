@@ -8,7 +8,7 @@
     <string name="crime_title_label">Title</string>
     <string name="crime_details_label">Details</string>
     <string name="crime_solved_label">Done!</string>
-    <string name="date_picker_title">date of Crime</string>
+    <string name="date_picker_title">Date</string>
     <string name="new_crime">New Crime</string>
     <string name="show_subtitle">Show Subtitle</string>
     <string name="hide_subtitle">Hide Subtitle</string>
@@ -16,5 +16,8 @@
     <string name="Enter_Title">Title</string>
     <string name="Enter_Content">Enter details</string>
     <string name="zeroItemSelected">0 item selected</string>
+    <string name="NoteHint">Note</string>
+    <string name="title_of_timePicker">Time</string>
+    <string name="ok">ok</string>
 
 </resources>

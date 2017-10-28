@@ -1,6 +1,5 @@
-package com.example.khaled.crime.models;
+package com.example.khaled.Note.models;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
 

@@ -1,12 +1,11 @@
-package com.example.khaled.crime.database;
+package com.example.khaled.Note.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
-import com.example.khaled.crime.database.CrimeDbSchema.CrimeTable;
+import com.example.khaled.Note.database.CrimeDbSchema.CrimeTable;
 
-import com.example.khaled.crime.models.Crime;
+import com.example.khaled.Note.models.Crime;
 
-import java.security.cert.CRLReason;
 import java.util.Date;
 import java.util.UUID;
 

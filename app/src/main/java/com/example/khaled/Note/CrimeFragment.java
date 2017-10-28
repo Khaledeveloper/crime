@@ -1,28 +1,28 @@
-package com.example.khaled.crime;
+package com.example.khaled.Note;
 
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.khaled.crime.models.Crime;
-import com.example.khaled.crime.models.CrimeLab;
+import com.example.khaled.Note.models.Crime;
+import com.example.khaled.Note.models.CrimeLab;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.UUID;
 
 
@@ -118,7 +118,11 @@ EditText mEditText, mContentText;
         });
 
        // mDateButtn.setText(mCrime.getDate().toString());
-        mDateButtn.setText(mCrime.getDate().toString());
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        df.setTimeZone(TimeZone.getDefault());
+        String date = df.format(mCrime.getDate());
+        mDateButtn.setText(date);
         //mDateButtn.setEnabled(false);
         mCheckBox.setChecked(mCrime.isSolved());
 
@@ -182,6 +186,12 @@ EditText mEditText, mContentText;
 
 
     private void DateUpdate(){
-        mDateButtn.setText(mCrime.getDate().toString());
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        df.setTimeZone(TimeZone.getDefault());
+        String date = df.format(mCrime.getDate());
+       // mDateButtn.setText(mCrime.getDate().toString());
+
+        mDateButtn.setText(date);
     }
 }

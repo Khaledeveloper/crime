@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.khaled.crime">
+          package="com.example.khaled.Note">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name="com.example.khaled.Note.activities.MainActivity">
         </activity>
-        <activity android:name=".activities.CrimeListActivity">
+        <activity android:name="com.example.khaled.Note.activities.CrimeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -19,8 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.ViewPagerActivity"
-            android:parentActivityName=".activities.CrimeListActivity">
+            android:name="com.example.khaled.Note.activities.ViewPagerActivity"
+            android:parentActivityName="com.example.khaled.Note.activities.CrimeListActivity">
         </activity>
         <activity android:name=".AddNote">
         </activity>

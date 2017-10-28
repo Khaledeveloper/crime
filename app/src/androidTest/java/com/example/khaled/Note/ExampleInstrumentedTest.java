@@ -1,4 +1,4 @@
-package com.example.khaled.crime;
+package com.example.khaled.Note;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

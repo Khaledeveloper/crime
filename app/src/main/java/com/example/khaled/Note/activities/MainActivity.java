@@ -1,17 +1,11 @@
 
-package com.example.khaled.crime.activities;
+package com.example.khaled.Note.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.example.khaled.crime.CrimeFragment;
-import com.example.khaled.crime.models.Crime;
-import com.example.khaled.crime.models.CrimeLab;
+import com.example.khaled.Note.CrimeFragment;
 
 import java.util.UUID;
 

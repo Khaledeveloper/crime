@@ -1,4 +1,4 @@
-package com.example.khaled.crime;
+package com.example.khaled.Note;
 
 
 import android.content.Context;
@@ -19,19 +19,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.khaled.crime.activities.MainActivity;
-import com.example.khaled.crime.activities.ViewPagerActivity;
-import com.example.khaled.crime.activities.CrimeListActivity;
-import com.example.khaled.crime.models.Crime;
-import com.example.khaled.crime.models.CrimeLab;
+import com.example.khaled.Note.activities.ViewPagerActivity;
+import com.example.khaled.Note.models.Crime;
+import com.example.khaled.Note.models.CrimeLab;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.TimeZone;
 
 
 /**
@@ -169,8 +167,13 @@ private TextView mTitleCrime , mDateCrime;
 
         public void Bindcrime(Crime crime){
             mCrime = crime;
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            df.setTimeZone(TimeZone.getDefault());
+           String date = df.format(mCrime.getDate());
+
             mTitleCrime.setText(mCrime.getTitle());
-            mDateCrime.setText(mCrime.getDate().toString());
+            mDateCrime.setText(date);
             mCheckBoxList.setChecked(mCrime.isSolved());
             mContentNote.setText(mCrime.getContent());
 
@@ -192,7 +195,7 @@ private TextView mTitleCrime , mDateCrime;
             //UUID CrimeID = crime.getId();
          //changing the intent from Mainactivity to ViewPager
           //  Intent intent = MainActivity.newIntent(getActivity(),mCrime.getId());
-            Intent intent = ViewPagerActivity.newIntent(getActivity(),mCrime.getId());
+            Intent intent = ViewPagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(intent);
 
            /* Intent intent = new Intent(getActivity(),MainActivity.class);
