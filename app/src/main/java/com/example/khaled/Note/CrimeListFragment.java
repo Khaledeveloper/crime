@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.khaled.Note.activities.ViewPagerActivity;
 import com.example.khaled.Note.models.Crime;
@@ -39,6 +43,8 @@ public class CrimeListFragment extends Fragment {
     CrimeAdapter mAdapter;
     Toolbar mToolbar;
     FloatingActionButton mFAB;
+    private DrawerLayout mDrawerLayout;
+    //private ActionBarDrawerToggle mActionBarDrawerToggle;
     static boolean isSelected = false;
     ArrayList<Crime> SelectedItems = new ArrayList<>();
 
@@ -60,10 +66,25 @@ public class CrimeListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
+
+
+
 mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
         mToolbar=(Toolbar)view.findViewById(R.id.ToolbarrecyclerviewID);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        mDrawerLayout=(DrawerLayout)view.findViewById(R.id.DrawerLayoutMainID);
+
+        ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout,mToolbar,R.string.Enter_Content ,R.string.date_picker_title);
+
+        if (((AppCompatActivity)getActivity()).getSupportActionBar()!=null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        }
+        mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+        mActionBarDrawerToggle.syncState();
 
         TextView textViewToolbar =(TextView)view.findViewById(R.id.TextviewToolbarRecyclerviewID);
 
@@ -122,7 +143,11 @@ private TextView mTitleCrime , mDateCrime;
         public Crimeholder(View itemView/*, CrimeListActivity crimeListActivity*/) {
             super(itemView);
 
+
+
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+
           //  itemView.setOnLongClickListener(this);
 
           //  checkdelete.setVisibility(View.GONE);
@@ -204,11 +229,16 @@ private TextView mTitleCrime , mDateCrime;
         }
 
 
+
+
+
+
         @Override
         public boolean onLongClick(View v) {
            // CrimeListFragment.isSelected = true;
+            Toast.makeText(itemView.getContext(), "hi", Toast.LENGTH_SHORT).show();
 
-            return false;
+            return true;
         }
     }
 

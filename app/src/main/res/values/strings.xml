@@ -19,5 +19,7 @@
     <string name="NoteHint">Note</string>
     <string name="title_of_timePicker">Time</string>
     <string name="ok">ok</string>
+    <string name="setting_navi">settings</string>
+    <string name="about_navi">about</string>
 
 </resources>
