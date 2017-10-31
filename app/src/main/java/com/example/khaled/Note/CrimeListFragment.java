@@ -25,7 +25,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khaled.Note.activities.CrimeListActivity;
 import com.example.khaled.Note.activities.ViewPagerActivity;
+import com.example.khaled.Note.interfaces.InterfaceOnLongClick;
 import com.example.khaled.Note.models.Crime;
 import com.example.khaled.Note.models.CrimeLab;
 
@@ -39,11 +41,13 @@ import java.util.TimeZone;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CrimeListFragment extends Fragment {
+public class CrimeListFragment extends Fragment implements InterfaceOnLongClick {
+
     CrimeAdapter mAdapter;
     Toolbar mToolbar;
     FloatingActionButton mFAB;
     private DrawerLayout mDrawerLayout;
+    Crimeholder crimeholder;
     //private ActionBarDrawerToggle mActionBarDrawerToggle;
     static boolean isSelected = false;
     ArrayList<Crime> SelectedItems = new ArrayList<>();
@@ -53,7 +57,10 @@ public class CrimeListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+
+
     }
+
 
     RecyclerView mRecyclerView;
     public CrimeListFragment() {
@@ -133,9 +140,18 @@ mRecyclerView =(RecyclerView)view.findViewById(R.id.mRecyclerviewID);
 
     }
 
+
+
+    @Override
+    public void onLongClickInterface(View view, int position) {
+        Toast.makeText(view.getContext(), "interface done!!", Toast.LENGTH_SHORT).show();
+
+    }
+
     public class Crimeholder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 private TextView mTitleCrime , mDateCrime;
         private TextView mContentNote;
+        InterfaceOnLongClick interfaceOnLongClick;
         public CheckBox mCheckBoxList,checkdelete;
         private Crime mCrime;
         CardView mCardView;
@@ -185,6 +201,9 @@ private TextView mTitleCrime , mDateCrime;
 
 
 
+        }
+        public void setonLongClick(InterfaceOnLongClick interfaceOnLongClick){
+            this.interfaceOnLongClick = interfaceOnLongClick;
         }
 
 
@@ -236,14 +255,17 @@ private TextView mTitleCrime , mDateCrime;
         @Override
         public boolean onLongClick(View v) {
            // CrimeListFragment.isSelected = true;
-            Toast.makeText(itemView.getContext(), "hi", Toast.LENGTH_SHORT).show();
 
+            if (interfaceOnLongClick!=null) {
+                interfaceOnLongClick.onLongClickInterface(itemView, getAdapterPosition());
+            }
             return true;
         }
     }
 
 
     public class CrimeAdapter extends RecyclerView.Adapter<Crimeholder>{
+        InterfaceOnLongClick interfaceOnLongClick;
         private List<Crime> mCrimes;
         Context mContext;
        // CrimeListActivity mCrimeListActivity;
@@ -302,7 +324,13 @@ private TextView mTitleCrime , mDateCrime;
             mCrimes = crimes;
         }
 
+
+
+
+
     }
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
